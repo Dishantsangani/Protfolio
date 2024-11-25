@@ -268,7 +268,7 @@ function Contact() {
               peer-[:not(:placeholder-shown)]:-translate-y-1.5
               peer-[:not(:placeholder-shown)]:text-neutral-400"
                     >
-                      Tell us about your project
+                      Enter Message
                     </label>
                     {errors.message && (
                       <p className="text-red-500">{errors.message}</p>
