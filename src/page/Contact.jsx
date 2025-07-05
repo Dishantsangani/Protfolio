@@ -1,7 +1,7 @@
 import { React, useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
 import { BlurText } from "../Animations/BlurText";
 import phone from "../assets/phone.png";
+import axios from "axios";
 function Contact() {
   const form = useRef();
   const [Fdata, setFdata] = useState({
@@ -10,7 +10,9 @@ function Contact() {
     phone: "",
     message: "",
   });
-  const [errors, setErrors] = useState({}); // For validation error messages
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   // Handle input changes
   const handleChange = (e) => {
@@ -20,15 +22,12 @@ function Contact() {
       ...prevData,
       [name]: value,
     }));
-
-    // Validate on input change
     validateField(name, value);
   };
 
   // Validation logic
   const validateField = (name, value) => {
     let errorMsg = "";
-
     switch (name) {
       case "name":
         if (!value) errorMsg = "Name is required.";
@@ -51,10 +50,9 @@ function Contact() {
       default:
         break;
     }
-
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [name]: errorMsg, // Set specific error message
+      [name]: errorMsg,
     }));
   };
 
@@ -87,35 +85,34 @@ function Contact() {
     return isValid;
   };
 
-  const handlesubmit = (e) => {
+  // Handle form submission
+  const handlesubmit = async (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      console.log("Form submitted:", Fdata);
-      // Clear the form
-      setFdata({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
-      setErrors({});
-    } else {
+    if (!validateForm()) {
       console.log("Validation failed.");
+      return;
     }
 
-    emailjs
-      .sendForm("service_r5737rq", "template_vqu0kxg", form.current, {
-        publicKey: "xXm1Dy2ZY7QheJk4W",
-      })
-      .then(
-        (res) => {
-          console.log("Result", res);
-        },
-        (error) => {
-          console.log("Error's", error);
-        }
+    try {
+      const response = await axios.post(
+        "https://portfolio-backend-0xac.onrender.com/send-email",
+        Fdata,
+        { headers: { "Content-Type": "application/json" } }
       );
+      console.log("Email Sent:", response.data);
+
+      // Clear form after successful submission
+      setFdata({ name: "", email: "", phone: "", message: "" });
+      setErrors({});
+      setSuccessMessage("Email sent successfully! ✅");
+    } catch (error) {
+      console.error("Error sending email:", error);
+      setSuccessMessage("❌ Failed to send email. Try again!");
+    } finally {
+      setLoading(false);
+      setTimeout(() => setSuccessMessage(""), 3000); // Remove message after 5 sec
+    }
   };
 
   return (
@@ -256,7 +253,6 @@ function Contact() {
             autofill:pt-6
             autofill:pb-2"
                       placeholder="This is a textarea placeholder"
-                      defaultValue={""}
                     />
                     <label
                       htmlFor="hs-tac-message"
@@ -282,26 +278,63 @@ function Contact() {
                     All fields are required
                   </p>
                   <p className="mt-5">
-                    <a className="group inline-flex items-center gap-x-2 py-2 px-3 bg-[#ff0] font-medium text-sm text-neutral-800 rounded-full focus:outline-none">
-                      <input type="submit" value="Send" />
-
-                      <svg
-                        className="flex-shrink-0 size-4 transition group-hover:translate-x-0.5 group-hover:translate-x-0 group-focus:translate-x-0.5 group-focus:translate-x-0"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </a>
+                    <button
+                      type="submit"
+                      onClick={handlesubmit}
+                      disabled={loading}
+                      className="group inline-flex items-center gap-x-2 py-2 px-3 bg-[#ff0] font-medium text-sm text-neutral-800 rounded-full focus:outline-none"
+                    >
+                      {loading ? (
+                        <>
+                          <svg
+                            className="animate-spin size-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <circle
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              strokeOpacity="0.2"
+                            />
+                            <path d="M12 2a10 10 0 0 1 10 10" />
+                          </svg>
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          Send
+                          <svg
+                            className="flex-shrink-0 size-4 transition group-hover:translate-x-0 group-focus:translate-x-0.5"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width={24}
+                            height={24}
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M5 12h14" />
+                            <path d="m12 5 7 7-7 7" />
+                          </svg>
+                        </>
+                      )}
+                    </button>
                   </p>
+
+                  {/* Success Message */}
+                  {successMessage && (
+                    <p className="text-green-500 text-sm mt-2">
+                      {successMessage}
+                    </p>
+                  )}
                 </div>
               </form>
             </div>
@@ -367,7 +400,6 @@ function Contact() {
                   alt="phone"
                   width={32}
                   height={32}
-                  viewBox="0 0 32 32"
                 />
 
                 <div className="grow">

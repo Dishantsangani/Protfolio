@@ -1,6 +1,6 @@
 import React from "react";
 import code from "../assets/code3.jpg";
-import cv from "../assets/cv.svg";
+import resume from "../assets/Resumeicon.svg";
 import { BlurText } from "../Animations/BlurText";
 import pdf from "../assets/PDF/Dishant Sangani.pdf";
 
@@ -122,7 +122,7 @@ function Skills() {
                 {/* Right Content */}
                 <div className="grow pt-0.5 pb-8 sm:pb-12">
                   <p className="text-sm md:text-base text-neutral-400">
-                    <span className="text-white">React.js :</span> Building
+                    <span className="text-white">React Js :</span> Building
                     dynamic, component-based user interfaces.
                   </p>
                 </div>
@@ -141,8 +141,8 @@ function Skills() {
                 {/* Right Content */}
                 <div className="grow pt-0.5 pb-8 sm:pb-12">
                   <p className="text-sm md:text-base text-neutral-400">
-                    <span className="text-white">API Integration :</span>{" "}
-                    Connecting frontend with backend systems.
+                    <span className="text-white">Node Js</span> Building fast
+                    and scalable backend applications.
                   </p>
                 </div>
                 {/* End Right Content */}
@@ -160,8 +160,8 @@ function Skills() {
                 {/* Right Content */}
                 <div className="grow pt-0.5 pb-8 sm:pb-12">
                   <p className="text-sm md:text-base text-neutral-400">
-                    <span className="text-white">Version Control :</span>{" "}
-                    Collaborating seamlessly using Git and GitHub.
+                    <span className="text-white">MongoDB :</span> Efficiently
+                    managing and scaling NoSQL databases.
                   </p>
                 </div>
                 {/* End Right Content */}
@@ -174,11 +174,10 @@ function Skills() {
                 target="_blank"
               >
                 <img
-                  src={cv}
+                  src={resume}
                   alt="CV"
                   width={24}
                   height={24}
-                  viewBox="0 0 24 24"
                   className="flex-shrink-0 size-4"
                 />
                 Download CV

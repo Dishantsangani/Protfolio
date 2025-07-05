@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import html from "../assets/html.svg";
 import css from "../assets/css.svg";
 import js from "../assets/js.svg";
 import react from "../assets/react.svg";
 import redux from "../assets/redux.svg";
-import tailwind from "../assets/tailwind.svg";
 import github from "../assets/github.svg";
-import git from "../assets/git.svg";
+import node from "../assets/Nodejs.svg";
+import mongodb from "../assets/MongoDB.svg";
 import { BlurText } from "../Animations/BlurText";
 import Project from "./Project";
 import About from "./About";
@@ -14,42 +14,36 @@ import Skills from "./Skills";
 import Contact from "./Contact";
 
 function Hero() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  // const toggleNavbar = () => {
-  //   setIsOpen(!isOpen);
-  // };
-  // const handleScroll = (id) => {
-  //   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  // };
-
   return (
     <>
       <main id="content">
-        <div class="bg-neutral-900">
-          <div class="max-w-5xl mx-auto px-4 xl:px-0 pt-24 lg:pt-32 pb-24">
-            <h1 class="font-semibold text-white text-5xl md:text-6xl">
-              <span class="">Hi, I'am Dishant</span> <br />
+        <div className="bg-neutral-900">
+          <div className="max-w-5xl mx-auto px-4 xl:px-0 pt-24 lg:pt-32 pb-24">
+            <h1 className="font-semibold text-white text-4xl md:text-6xl leading-tight">
+              <span>Hi, I'm Dishant Sangani</span> <br />
               <BlurText
-                text="Web Devloper !"
+                text="Web Developer!"
                 className="custom-class text-[#ff0]"
                 delay={50}
               />
             </h1>
-            <div class="max-w-4xl">
-              <p class="mt-5 text-neutral-400 text-lg">
-                I am a passionate and dedicated web developer with expertise in
-                HTML, CSS, JavaScript, Tailwind CSS, and React.js. I build
-                dynamic, responsive, and user-friendly websites and web
-                applications, ensuring a smooth and engaging user experience
-                across all devices. I have a strong foundation in modern
-                development tools and version control systems, including Git and
-                GitHub, which I use to manage and collaborate on code
-                efficiently.
+            <div className="max-w-4xl">
+              <p className="mt-5 text-neutral-400 text-lg md:text-xl leading-relaxed">
+                I'm a passionate Full Stack Developer with hands-on experience
+                in building dynamic, scalable, and user-friendly web
+                applications using the MERN stack (MongoDB, Express.js,
+                React.js, Node.js). I specialize in crafting intuitive
+                frontends, building secure and efficient backend APIs, and
+                deploying full-stack solutions with real-world impact. From
+                responsive UI design to database modeling and authentication
+                flows, I take pride in delivering high-quality code and seamless
+                user experiences. Always eager to learn and grow, I enjoy
+                turning complex problems into clean, functional products.
               </p>
             </div>
           </div>
         </div>
+
         <div className="relative overflow-hidden pt-4 bg-neutral-900">
           <svg
             className="absolute -bottom-20 start-1/2 w-[1900px] transform -translate-x-1/2"
@@ -140,58 +134,62 @@ function Hero() {
               stroke="currentColor"
             />
           </svg>
+
           <div className="relative z-10">
             <div className="max-w-5xl px-4 xl:px-0 mx-auto">
               <div className="mb-4">
-                <h2 className="text-neutral-400">
+                <h2 className="text-neutral-400 text-center text-lg sm:text-xl">
                   Building Excellence with These Technologies
                 </h2>
               </div>
-              <div className="flex justify-between gap-6">
+
+              {/* Responsive Tech Icons */}
+              <div className="flex flex-wrap justify-center sm:justify-between gap-4 sm:gap-6">
                 <img
                   src={html}
                   alt="html"
-                  className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 text-neutral-400"
+                  className="py-3 w-12 sm:w-14 md:w-20 lg:w-24"
                 />
                 <img
                   src={css}
                   alt="css"
-                  className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 text-neutral-400"
-                />
-                <img
-                  src={tailwind}
-                  alt="tailwind"
-                  className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 text-neutral-400"
+                  className="py-3 w-12 sm:w-14 md:w-20 lg:w-24"
                 />
                 <img
                   src={js}
                   alt="javascript"
-                  className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 text-neutral-400"
+                  className="py-3 w-12 sm:w-14 md:w-20 lg:w-24"
                 />
                 <img
                   src={react}
                   alt="react"
-                  className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 text-neutral-400"
+                  className="py-3 w-12 sm:w-14 md:w-20 lg:w-24"
                 />
                 <img
                   src={redux}
                   alt="redux"
-                  className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 text-neutral-400"
+                  className="py-3 w-12 sm:w-14 md:w-20 lg:w-24"
                 />
                 <img
                   src={github}
                   alt="github"
-                  className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 text-neutral-400"
+                  className="py-3 w-12 sm:w-14 md:w-20 lg:w-24"
                 />
                 <img
-                  src={git}
-                  alt="git"
-                  className="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 text-neutral-400"
+                  src={node}
+                  alt="node"
+                  className="py-3 w-12 sm:w-14 md:w-20 lg:w-24"
+                />
+                <img
+                  src={mongodb}
+                  alt="mongodb"
+                  className="py-3 w-12 sm:w-14 md:w-20 lg:w-24"
                 />
               </div>
             </div>
           </div>
         </div>
+
         {/* End Skils Icon */}
 
         {/* Project  */}
